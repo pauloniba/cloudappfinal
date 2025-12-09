@@ -1,5 +1,5 @@
 // src/scenes/LobbyLoginScene.js
-const LOBBY_BASE_URL = "http://localhost:5000"; // FastAPI lobby
+const LOBBY_BASE_URL = "https://cloudappfinal-production.up.railway.app";
 
 export default class LobbyLoginScene extends Phaser.Scene {
   constructor() {
