@@ -1,0 +1,24 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn.lock
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+
+# VS Code
+.vscode/
+.vscode-server/
+
+# OS crap
+.DS_Store
+Thumbs.db
+
+# Environment / secrets
+.env
+.env.local

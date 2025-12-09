@@ -1,0 +1,38 @@
+version: "3.9"
+
+services:
+  # ==========================
+  # LOBBY SERVICE (PYTHON)
+  # ==========================
+  lobby:
+    build: ./lobby-service
+    container_name: lobby
+    ports:
+      - "5000:5000"           # FastAPI lobby accessible on host
+    networks:
+      - appnet
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock   # REQUIRED for spawning game servers
+
+  # ==========================
+  # GAME SERVER IMAGE (NODE + SOCKET.IO)
+  # ==========================
+  game-server:
+    build: ./game-server
+    networks:
+      - appnet
+    restart: unless-stopped
+    environment:
+      - SERVER_ID=${HOSTNAME}
+    # NOTE: This container is **NOT run automatically**.
+    # The lobby dynamically spawns game servers using this image.
+    # This exists only so Docker has something to build.
+
+
+# ==========================
+# SHARED NETWORK
+# ==========================
+networks:
+  appnet:
+    driver: bridge
