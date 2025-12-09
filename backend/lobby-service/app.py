@@ -125,21 +125,32 @@ def get_free_port(start: int = 4000, end: int = 5000) -> int:
 # GAME SERVER SPAWNING
 # =====================================================
 
+# =====================================================
+# GAME SERVER SPAWNING (FINAL PRODUCTION VERSION)
+# =====================================================
+
+# Put your WebSocket Railway Game Server URL here:
+RAILWAY_GAME_SERVER_URL = "wss://switchyard.proxy.rlwy.net:19296"
+
 def spawn_game_server(room_id: str):
-    """Launch a game server container for this room with a guaranteed free port."""
+    """
+    Production (Railway) mode:
+    - DO NOT spawn multiple game servers
+    - Always use the same hosted WebSocket server
+    """
 
     # =====================================================
-    # RAILWAY MODE — no Docker. Use shared remote server.
+    # RAILWAY MODE — always use hosted game server
     # =====================================================
     if RAILWAY_GAME_SERVER_URL:
         return {
             "container_id": None,
             "port": None,
-            "ws_url": RAILWAY_GAME_SERVER_URL  # same server for every room
+            "ws_url": RAILWAY_GAME_SERVER_URL
         }
 
     # =====================================================
-    # LOCAL MODE — real Docker spawning (your current code)
+    # LOCAL MODE — this runs ONLY if you're doing localhost dev
     # =====================================================
     port = get_free_port(GAME_SERVER_START_PORT, 5000)
 
@@ -160,7 +171,6 @@ def spawn_game_server(room_id: str):
         "port": port,
         "ws_url": f"ws://localhost:{port}"
     }
-
 
 # =====================================================
 # SESSION / ROOM MANAGEMENT
