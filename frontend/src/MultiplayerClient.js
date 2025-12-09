@@ -37,11 +37,12 @@ export default class MultiplayerClient {
     console.log("Connecting to game server:", this.wsUrl);
   
     this.socket = window.io(this.wsUrl, {
-      transports: ["websocket", "polling"],
+      transports: ["websocket"],
       reconnection: true,
       reconnectionAttempts: 5,
       reconnectionDelay: 500,
     });
+    
   
     // ===============================
     // MATCH EVENTS FROM SERVER
