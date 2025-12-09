@@ -4,6 +4,8 @@ import MultiplayerClient from "../MultiplayerClient.js";
 const FINISH_SCORE = 10000;
 const CHECKPOINT_INTERVAL = 2000;
 const MAX_LIVES = 3;
+const GAME_SERVER_URL = "wss://switchyard.proxy.rlwy.net:19296";
+
 
 export default class GameScene extends Phaser.Scene {
   constructor() {
