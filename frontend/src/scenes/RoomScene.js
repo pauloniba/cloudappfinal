@@ -1,5 +1,6 @@
 // src/scenes/RoomScene.js
-const LOBBY_BASE_URL = "http://localhost:5000";
+const LOBBY_BASE_URL = "https://cloudappfinal-production.up.railway.app";
+
 const FALLBACK_COUNTDOWN = 20;
 
 const CHARACTER_OPTIONS = [
