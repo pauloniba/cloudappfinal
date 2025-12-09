@@ -3,6 +3,8 @@ import uuid
 import threading
 import subprocess
 import socket
+import os
+RAILWAY_GAME_SERVER_URL = os.getenv("GAME_SERVER_URL") 
 from typing import Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException
@@ -125,7 +127,20 @@ def get_free_port(start: int = 4000, end: int = 5000) -> int:
 
 def spawn_game_server(room_id: str):
     """Launch a game server container for this room with a guaranteed free port."""
-    
+
+    # =====================================================
+    # RAILWAY MODE — no Docker. Use shared remote server.
+    # =====================================================
+    if RAILWAY_GAME_SERVER_URL:
+        return {
+            "container_id": None,
+            "port": None,
+            "ws_url": RAILWAY_GAME_SERVER_URL  # same server for every room
+        }
+
+    # =====================================================
+    # LOCAL MODE — real Docker spawning (your current code)
+    # =====================================================
     port = get_free_port(GAME_SERVER_START_PORT, 5000)
 
     cmd = [
@@ -144,7 +159,6 @@ def spawn_game_server(room_id: str):
         "container_id": container_id,
         "port": port,
         "ws_url": f"ws://localhost:{port}"
-
     }
 
 
