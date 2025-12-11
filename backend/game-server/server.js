@@ -6,7 +6,16 @@ const app = express();
 const server = http.createServer(app);
 
 const io = new Server(server, {
-  cors: { origin: "*" },
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true
+  },
+  transports: ["websocket", "polling"],
+  allowEIO3: true,
+  pingInterval: 25000,
+  pingTimeout: 50000,
 });
 
 // Unique ID for logging
