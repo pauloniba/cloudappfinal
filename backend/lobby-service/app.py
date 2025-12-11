@@ -4,7 +4,7 @@ import threading
 import subprocess
 import socket
 import os
-RAILWAY_GAME_SERVER_URL = os.getenv("GAME_SERVER_URL") 
+
 from typing import Dict, List, Optional
 
 from fastapi import FastAPI, HTTPException
@@ -130,7 +130,8 @@ def get_free_port(start: int = 4000, end: int = 5000) -> int:
 # =====================================================
 
 # Put your WebSocket Railway Game Server URL here:
-RAILWAY_GAME_SERVER_URL = "wss://aware-quietude-production.up.railway.app"
+RAILWAY_GAME_SERVER_URL = "wss://switchyard.proxy.rlwy.net:19296"
+
 
 def spawn_game_server(room_id: str):
     """
