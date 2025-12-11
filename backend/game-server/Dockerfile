@@ -1,11 +1,15 @@
-FROM node:18
+FROM node:18-alpine
 
 WORKDIR /app
 
-COPY package*.json ./
+# Copy ONLY the game-server package files
+COPY backend/game-server/package*.json ./
+
 RUN npm install
 
-COPY . .
+# Copy the rest of the game-server folder
+COPY backend/game-server/. .
 
 EXPOSE 3000
+
 CMD ["node", "server.js"]
