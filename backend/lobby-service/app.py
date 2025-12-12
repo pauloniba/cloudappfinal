@@ -130,7 +130,9 @@ def get_free_port(start: int = 4000, end: int = 5000) -> int:
 # =====================================================
 
 # Put your WebSocket Railway Game Server URL here:
-RAILWAY_GAME_SERVER_URL = "wss://switchyard.proxy.rlwy.net:19296"
+# Load the actual game server WS URL from Railway
+RAILWAY_GAME_SERVER_URL = os.getenv("GAME_SERVER_URL")
+
 
 
 def spawn_game_server(room_id: str):
